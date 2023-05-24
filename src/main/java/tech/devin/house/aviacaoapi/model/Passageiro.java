@@ -3,6 +3,8 @@ package tech.devin.house.aviacaoapi.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Data
@@ -11,15 +13,16 @@ import java.time.LocalDate;
 public class Passageiro {
 
     @Id
-    Long cpf;
+    private Long cpf;
 
-    String nome;
+    private String nome;
 
-    LocalDate dataNascimento;
+    @DateTimeFormat(pattern="dd-MM-yyyy")
+    private LocalDate dataNascimento;
 
     @Enumerated(EnumType.STRING)
-    Classificacao classificacao;
+    private Classificacao classificacao;
 
-    Integer milhas = 100;
+    private Integer milhas;
 
 }

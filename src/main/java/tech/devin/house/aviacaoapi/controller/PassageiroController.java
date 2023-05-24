@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.devin.house.aviacaoapi.dto.PassageiroCompletoResponse;
+import tech.devin.house.aviacaoapi.dto.PassageiroResponse;
 import tech.devin.house.aviacaoapi.model.Passageiro;
 import tech.devin.house.aviacaoapi.service.PassageiroService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/passageiros")
@@ -28,6 +31,15 @@ public class PassageiroController {
                 .map(v -> modelMapper.map(v, PassageiroCompletoResponse.class)).toList();
         return ResponseEntity.ok(passageiroCompletoResponse);
     }
+
+
+    @GetMapping("{cpf}")
+    public ResponseEntity<PassageiroResponse> consultarCpf(@PathVariable("cpf") Long cpf) {
+        Passageiro passageiros = service.obter(cpf);
+        PassageiroResponse resp = modelMapper.map(passageiros, PassageiroResponse.class);
+        return ResponseEntity.ok(resp);
+    }
+
 
 
 

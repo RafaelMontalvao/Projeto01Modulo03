@@ -1,10 +1,12 @@
 package tech.devin.house.aviacaoapi.controller;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.devin.house.aviacaoapi.service.AssentoService;
 
 import java.util.List;
 
@@ -12,12 +14,17 @@ import java.util.List;
 @RequestMapping("/api/assentos")
 public class AssentoController {
 
-    @GetMapping
-    public ResponseEntity<List<String>> consultarAssentos() {
-        List<String> assentos = obterAssentos();
-        return ResponseEntity.ok(assentos);
+    private final AssentoService assentoService;
+    private final ModelMapper modelMapper;
+
+    public AssentoController(AssentoService assentoService, ModelMapper modelMapper) {
+        this.assentoService = assentoService;
+        this.modelMapper = modelMapper;
     }
 
-
-
+    @GetMapping
+    public ResponseEntity consultarAssentos() {
+        List<String> assentos = assentoService.obterAssentos();
+        return ResponseEntity.ok(assentos);
+    }
 }

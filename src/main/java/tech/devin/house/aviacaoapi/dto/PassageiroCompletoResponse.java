@@ -1,13 +1,9 @@
 package tech.devin.house.aviacaoapi.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-import tech.devin.house.aviacaoapi.model.Classificacao;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class PassageiroCompletoResponse {
@@ -15,12 +11,13 @@ public class PassageiroCompletoResponse {
 
     private Long cpf;
     private String nome;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private String classificacao;
     private Integer milhas;
     private String eticket;
     private String assento;
-    private LocalDate DataHoraConfirmacao;
+    private LocalDateTime DataHoraConfirmacao;
 
 
 

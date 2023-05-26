@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.devin.house.aviacaoapi.exception.RegistroNaoEncontradoException;
 import tech.devin.house.aviacaoapi.model.Passageiro;
+import tech.devin.house.aviacaoapi.repository.BilheteEmbarqueRepository;
 import tech.devin.house.aviacaoapi.repository.PassageiroRepository;
 
 import java.util.List;
@@ -15,8 +16,11 @@ import java.util.Optional;
 @Slf4j
 public class PassageiroService {
 
+
     @Autowired
     private PassageiroRepository repo;
+
+
 
     public List<Passageiro> listar() {
         return repo.findAll();
@@ -30,6 +34,9 @@ public class PassageiroService {
         }
         return passageiroOpt.get();
     }
+
+
+
 
 
 

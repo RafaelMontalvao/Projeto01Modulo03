@@ -5,7 +5,11 @@ import tech.devin.house.aviacaoapi.model.Passageiro;
 
 import java.util.Optional;
 
-public interface PassageiroRepository extends JpaRepository<Passageiro,Integer> {
+public interface PassageiroRepository extends JpaRepository<Passageiro,Long> {
     Optional<Passageiro> findByCpf(Long cpf);
+
+    boolean existsByCpf(Long cpf);
+
+
 
 }

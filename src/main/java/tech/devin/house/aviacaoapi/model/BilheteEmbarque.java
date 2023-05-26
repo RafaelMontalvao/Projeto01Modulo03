@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 
         private Boolean malas;
 
-        private LocalDate DataHoraConfirmacao;
+        private LocalDateTime dataHoraConfirmacao;
 
         @OneToOne
         @JoinColumn(name = "cpf", referencedColumnName = "cpf")

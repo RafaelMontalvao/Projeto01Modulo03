@@ -7,6 +7,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import tech.devin.house.aviacaoapi.dto.ConfirmacaoRequest;
+import tech.devin.house.aviacaoapi.model.BilheteEmbarque;
 
 @SpringBootApplication
 public class AviacaoApiApplication {
@@ -34,6 +36,8 @@ public class AviacaoApiApplication {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
+        modelMapper.typeMap(ConfirmacaoRequest.class, BilheteEmbarque.class)
+                .addMapping(src -> src.getCpf(), (dest, v) -> dest.getPassageiro().setCpf((Long)v));
         return modelMapper;
     }
 

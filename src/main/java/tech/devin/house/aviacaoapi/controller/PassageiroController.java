@@ -10,25 +10,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.devin.house.aviacaoapi.dto.PassageiroCompletoResponse;
 import tech.devin.house.aviacaoapi.dto.PassageiroResponse;
+import tech.devin.house.aviacaoapi.model.BilheteEmbarque;
 import tech.devin.house.aviacaoapi.model.Passageiro;
+import tech.devin.house.aviacaoapi.service.ConfirmacaoService;
 import tech.devin.house.aviacaoapi.service.PassageiroService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/passageiros")
 @AllArgsConstructor
 public class PassageiroController {
 
-    private ModelMapper modelMapper = new ModelMapper();
+    private ModelMapper modelMapper ;
     private PassageiroService service;
+    private ConfirmacaoService confrimacaoService;
+
 
     @GetMapping
     public ResponseEntity<List<PassageiroCompletoResponse>> consultar() {
         List<Passageiro> passageiros = service.listar();
         List<PassageiroCompletoResponse> passageiroCompletoResponse = passageiros.stream()
                 .map(v -> modelMapper.map(v, PassageiroCompletoResponse.class)).toList();
+        for(PassageiroCompletoResponse passageiro : passageiroCompletoResponse){
+            BilheteEmbarque bilheteEmbarque = confrimacaoService.consultarCpf(passageiro.getCpf());
+            if(bilheteEmbarque != null){
+                passageiro.setEticket(bilheteEmbarque.getEticket());
+                passageiro.setDataHoraConfirmacao(bilheteEmbarque.getDataHoraConfirmacao());
+                passageiro.setAssento((bilheteEmbarque.getAssento()));
+            }
+
+        }
         return ResponseEntity.ok(passageiroCompletoResponse);
     }
 

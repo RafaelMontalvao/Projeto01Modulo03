@@ -19,5 +19,11 @@ public class AssentoService {
                 assentos.add(assento);
             }
         }return assentos;
-}
+     }
+     public boolean existsAssento(String assento){
+        List<String>assentos = obterAssentos();
+         return assentos.contains(assento);
+
+     }
+
 }

@@ -9,4 +9,8 @@ import java.util.Optional;
 public interface BilheteEmbarqueRepository extends JpaRepository<BilheteEmbarque,String> {
 
     Optional<BilheteEmbarque> findByPassageiro_cpf(Long cpf);
+
+    boolean existsByAssento(String assento);
 }
+
+

@@ -25,4 +25,8 @@ public class Passageiro {
 
     private Integer milhas;
 
+    @OneToOne
+    @JoinColumn(name = "eticket", referencedColumnName = "eticket")
+    private BilheteEmbarque bilhete;
+
 }

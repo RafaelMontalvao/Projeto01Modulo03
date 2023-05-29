@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConfirmacaoRequest {
 
-    @NotNull(message = "{campo.obrigatorio")
+    @NotNull(message = "{campo.obrigatorio}")
     private Long cpf;
 
     @NotEmpty(message = "{campo.obrigatorio}")

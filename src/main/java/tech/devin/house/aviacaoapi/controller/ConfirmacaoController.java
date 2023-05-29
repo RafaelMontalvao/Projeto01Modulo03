@@ -32,7 +32,7 @@ public class ConfirmacaoController {
         BilheteEmbarque bilhete = mapper.map(request, BilheteEmbarque.class);
         bilhete = service.confirmacao(bilhete);
         ConfirmacaoResponse resp = mapper.map(bilhete, ConfirmacaoResponse.class);
-        return ResponseEntity.created(URI.create(resp.getEticket())).body(resp);
+        return ResponseEntity.ok(resp);
     }
 
 

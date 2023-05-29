@@ -2,6 +2,7 @@ package tech.devin.house.aviacaoapi.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "PASSAGEIRO")
+@AllArgsConstructor
 public class Passageiro {
 
     @Id
@@ -29,4 +31,8 @@ public class Passageiro {
     @JoinColumn(name = "eticket", referencedColumnName = "eticket")
     private BilheteEmbarque bilhete;
 
+
+
+
 }
+
